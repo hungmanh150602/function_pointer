@@ -34,6 +34,11 @@ int divide(int a, int b)
     return div;
 }
 
+void callback(int a, int b, int (*fn)(int, int))
+{
+    fn(a, b);
+}
+
 int main(void)
 {
     int (*operations[])(int, int) =
@@ -41,8 +46,7 @@ int main(void)
             add,
             subtract,
             multiply,
-            divide
-        };
+            divide};
 
     int command;
     int a;
@@ -60,7 +64,8 @@ int main(void)
         return 1;
     }
 
-    operations[command](a, b);
+    /* callback function */
+    callback(a, b, operations[command]);
 
     return 0;
 }
